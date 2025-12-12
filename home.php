@@ -11,10 +11,10 @@ get_header();
       ]);
       if ($feature->have_posts()) : $feature->the_post();
       ?>
-        <div class="hero-img">
+        <a class="hero-img" href="<?php the_permalink(); ?>" rel="bookmark">
           <?php if (has_post_thumbnail()) { the_post_thumbnail('large', ['itemprop' => 'image']); } ?>
           <div class="progress" aria-hidden="true"></div>
-        </div>
+        </a>
         <h1><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h1>
         <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 30)); ?></p>
         <div class="divider" aria-hidden="true"></div>
@@ -32,14 +32,18 @@ get_header();
             <p><?php echo esc_html(wp_trim_words(get_the_excerpt(), 22)); ?></p>
           </div>
           <div class="secondary-img">
-            <?php if (has_post_thumbnail()) { the_post_thumbnail('medium'); } ?>
+            <?php if (has_post_thumbnail()) { ?>
+              <a href="<?php the_permalink(); ?>" rel="bookmark">
+                <?php the_post_thumbnail('medium'); ?>
+              </a>
+            <?php } ?>
           </div>
         </article>
         <?php endif; wp_reset_postdata(); ?>
       <?php endif; wp_reset_postdata(); ?>
     </div>
     <div class="hero-right">
-    <aside class="side-reads" aria-label="Must Reads (Hero)">
+    <aside class="side-reads module" aria-label="Must Reads (Hero)">
       <h2 class="section-title"><span class="bar"></span><span><?php echo esc_html__('Must Reads', 'jazira'); ?></span></h2>
       <?php
       $aside_q = new WP_Query([
@@ -51,9 +55,13 @@ get_header();
         $aside_q->the_post();
       ?>
       <div class="lead">
-        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        <div class="thumb" aria-hidden="true">
-          <?php if (has_post_thumbnail()) { the_post_thumbnail('thumbnail'); } ?>
+        <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+        <div class="thumb">
+          <?php if (has_post_thumbnail()) { ?>
+            <a href="<?php the_permalink(); ?>" rel="bookmark">
+              <?php the_post_thumbnail('thumbnail'); ?>
+            </a>
+          <?php } ?>
         </div>
       </div>
       <div class="list">
@@ -63,7 +71,7 @@ get_header();
       </div>
       <?php endif; wp_reset_postdata(); ?>
     </aside>
-    <aside class="page-aside" aria-label="More Headlines">
+    <aside class="page-aside module" aria-label="More Headlines">
       <h2 class="section-title"><span class="bar"></span><span><?php echo esc_html__('More Headlines', 'jazira'); ?></span></h2>
       <?php
       $more_q = new WP_Query([
@@ -75,9 +83,13 @@ get_header();
         $more_q->the_post();
       ?>
       <div class="lead">
-        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-        <div class="thumb" aria-hidden="true">
-          <?php if (has_post_thumbnail()) { the_post_thumbnail('thumbnail'); } ?>
+        <a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a>
+        <div class="thumb">
+          <?php if (has_post_thumbnail()) { ?>
+            <a href="<?php the_permalink(); ?>" rel="bookmark">
+              <?php the_post_thumbnail('thumbnail'); ?>
+            </a>
+          <?php } ?>
         </div>
       </div>
       <div class="list">
@@ -118,9 +130,9 @@ get_header();
         ]);
         if ($q->have_posts()): $q->the_post();
         ?>
-          <div class="feature-media">
+          <a class="feature-media" href="<?php the_permalink(); ?>" rel="bookmark">
             <?php if (has_post_thumbnail()) { the_post_thumbnail('large', ['itemprop' => 'image']); } ?>
-          </div>
+          </a>
           <div class="feature-body">
             <p class="kicker"><?php echo esc_html($cat->name); ?></p>
             <h3 class="title" itemprop="headline"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h3>
@@ -139,8 +151,12 @@ get_header();
         if ($q2->have_posts()): while ($q2->have_posts()): $q2->the_post();
         ?>
           <div class="item" itemscope itemtype="https://schema.org/NewsArticle">
-            <div class="thumb" aria-hidden="true">
-              <?php if (has_post_thumbnail()) { the_post_thumbnail('thumbnail', ['itemprop' => 'image']); } ?>
+            <div class="thumb">
+              <?php if (has_post_thumbnail()) { ?>
+                <a href="<?php the_permalink(); ?>" rel="bookmark">
+                  <?php the_post_thumbnail('thumbnail', ['itemprop' => 'image']); ?>
+                </a>
+              <?php } ?>
             </div>
             <div class="meta">
               <p class="tag"><?php echo esc_html($cat->name); ?></p>
