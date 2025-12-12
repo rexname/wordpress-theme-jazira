@@ -11,6 +11,7 @@ Theme Name: Jazira
   --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
   --accent:#f59e0b;
   --radius:18px;
+  --danger:#dc2626;
 }
 *{box-sizing:border-box}
 body{
@@ -188,3 +189,45 @@ body{
   .grid{grid-template-columns:1fr}
   .feature-media{height:220px}
 }
+
+/* Home hero layout */
+.home-layout{max-width:1200px;margin:0 auto;padding:20px}
+.home-top{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:1.6fr 1fr;gap:28px}
+.home-main{display:flex;flex-direction:column;gap:28px}
+.home-hero{display:grid;grid-template-columns:1.6fr 1fr;gap:28px}
+.hero-img{width:100%;height:300px;background:#cbd5f5;border-radius:14px;position:relative;overflow:hidden}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.progress{position:absolute;bottom:0;left:0;height:10px;width:120px;background:var(--accent);border-radius:0 8px 0 14px}
+.home-hero h1{font-size:32px;line-height:1.25;margin:14px 0 6px;font-weight:800}
+.home-hero h1 a{color:var(--text);text-decoration:none}
+.home-hero h1 a:hover{text-decoration:underline;text-underline-offset:3px}
+.home-hero p{margin:0;font-size:15px;color:var(--muted);max-width:60ch}
+.divider{margin:24px 0;border-top:1px solid var(--border)}
+.hero-secondary{display:grid;grid-template-columns:1fr 160px;gap:16px;align-items:start}
+.hero-secondary h2{font-size:20px;line-height:1.25;font-weight:750;margin:0 0 8px}
+.secondary-img{width:160px;height:110px;background:#e5e7eb;border-radius:10px;overflow:hidden}
+.secondary-img img{width:100%;height:100%;object-fit:cover;display:block}
+.home-hero .home-main{grid-row:1 / span 2}
+.home-hero .hero-right{grid-column:2}
+.hero-right{display:flex;flex-direction:column;gap:24px;border-left:1px solid var(--border);padding-left:18px;border-bottom:1px solid var(--border)}
+.page-aside{margin-top:0}
+.hero-aside{display:flex;flex-direction:column;gap:18px}
+.hero-aside-item{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start}
+.hero-aside-img{width:96px;height:64px;background:#e5e7eb;border-radius:8px;overflow:hidden}
+.hero-aside-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-aside-item h3{margin:0;font-size:15px;line-height:1.35;font-weight:650}
+.badge{display:inline-block;margin-bottom:6px;padding:2px 8px;font-size:11px;font-weight:700;border-radius:999px;background:var(--danger);color:#fff}
+@media (max-width:900px){.home-layout{grid-template-columns:1fr}.home-hero{grid-template-columns:1fr}.hero-img{height:260px}}
+
+/* Page aside (Must Reads) */
+.side-reads, .page-aside{padding:18px}
+.side-reads .section-title, .page-aside .section-title{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin:0 0 16px 0}
+.side-reads .bar, .page-aside .bar{width:4px;height:20px;background:var(--accent);border-radius:999px}
+.side-reads .lead, .page-aside .lead{display:grid;grid-template-columns:1fr 96px;gap:12px;padding-bottom:16px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.side-reads .lead a, .page-aside .lead a{font-size:16px;font-weight:700;line-height:1.3;text-decoration:none;color:var(--text)}
+.side-reads .lead a:hover, .page-aside .lead a:hover{text-decoration:underline;text-underline-offset:3px}
+.side-reads .thumb, .page-aside .thumb{width:96px;height:64px;background:#e5e7eb;border-radius:8px;overflow:hidden}
+.side-reads .thumb img, .page-aside .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.side-reads .list, .page-aside .list{display:flex;flex-direction:column;gap:14px}
+.side-reads .list a, .page-aside .list a{text-decoration:none;color:var(--text);font-size:15px;font-weight:600;line-height:1.35}
+.side-reads .list a:hover, .page-aside .list a:hover{text-decoration:underline;text-underline-offset:3px}
