@@ -8,7 +8,7 @@
 </head>
 <body <?php body_class(); ?>>
 <header class="topbar">
-  <nav class="nav" aria-label="Primary">
+  <nav class="nav" aria-label="Primary" style="--admin-offset: <?php echo is_admin_bar_showing() ? 32 : 0; ?>px;">
     <a class="brand" href="<?php echo esc_url(home_url('/')); ?>" rel="home">
       <div class="logo" aria-hidden="true"></div>
       <div class="brandname"><?php bloginfo('name'); ?></div>
@@ -71,6 +71,7 @@
     });
   })();
   </script>
+  <?php if (!is_category() && !is_single()) : ?>
   <div class="trending-bar">
     <div class="trending-wrap">
       <div class="label">
@@ -78,13 +79,46 @@
         <span><?php echo esc_html__('Trending', 'jazira'); ?></span>
       </div>
       <?php
-        wp_nav_menu([
+        $menu_html = wp_nav_menu([
           'theme_location' => 'trending',
           'container' => false,
           'menu_class' => 'items',
           'fallback_cb' => false,
+          'echo' => false,
         ]);
+        if ($menu_html) {
+          echo $menu_html;
+        } else {
+          $tick = new WP_Query([
+            'posts_per_page' => 10,
+            'ignore_sticky_posts' => 1,
+          ]);
+          if ($tick->have_posts()) {
+            echo '<ul class="items">';
+            while ($tick->have_posts()) { $tick->the_post();
+              echo '<li><a href="'.esc_url(get_permalink()).'">'.esc_html(get_the_title()).'</a></li>';
+            }
+            echo '</ul>';
+          }
+          wp_reset_postdata();
+        }
       ?>
     </div>
   </div>
+  <script>
+  (function(){
+    var wrap = document.querySelector('.trending-wrap');
+    if(!wrap) return;
+    var list = wrap.querySelector('.items');
+    if(!list) return;
+    var children = Array.prototype.slice.call(list.children);
+    children.sort(function(a,b){
+      var ta = a.textContent.trim().toLowerCase();
+      var tb = b.textContent.trim().toLowerCase();
+      return ta.localeCompare(tb);
+    });
+    children.forEach(function(li){list.appendChild(li);});
+  })();
+  </script>
+  <?php endif; ?>
 </header>
